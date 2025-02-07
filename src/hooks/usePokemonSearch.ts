@@ -53,8 +53,6 @@ export function usePokemonSearch(search: string) {
                 specialdefense
                 speed
               }
-              height
-              weight
               flavorTexts {
                 flavor
                 game
@@ -75,7 +73,7 @@ export function usePokemonSearch(search: string) {
             setSuggestions(suggestions);
             setError(null);
           } else {
-            throw new Error("Aucun Pokémon trouvé");
+            throw new Error("No Pokemon found");
           }
           setPokemon([]);
           return;

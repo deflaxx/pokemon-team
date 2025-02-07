@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Plus, X, Heart, Swords, Shield, Zap } from 'lucide-react';
 import type { Pokemon } from '../types/pokemon';
 
@@ -10,10 +10,15 @@ interface PokemonCardProps {
 }
 
 export function PokemonCard({ pokemon, onAdd, onRemove, isInTeam }: PokemonCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const flavorText = pokemon.flavorTexts?.[0]?.flavor;
 
   return (
-    <div className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow border-2 border-${pokemon.color}-200`}>
+    <div 
+      className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow border-2 border-${pokemon.color}-200`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative">
         <img
           src={pokemon.sprite}
@@ -47,7 +52,7 @@ export function PokemonCard({ pokemon, onAdd, onRemove, isInTeam }: PokemonCardP
       </div>
 
       {flavorText && (
-        <p className="text-sm text-gray-600 italic mb-3 line-clamp-2">
+        <p className={`text-sm text-gray-600 italic mb-3 ${isHovered ? '' : 'line-clamp-2'}`}>
           "{flavorText}"
         </p>
       )}
@@ -69,10 +74,6 @@ export function PokemonCard({ pokemon, onAdd, onRemove, isInTeam }: PokemonCardP
           <Zap className="text-yellow-500" size={16} />
           <span>SPD: {pokemon.baseStats.speed}</span>
         </div>
-      </div>
-
-      <div className="mt-2 text-sm text-gray-500 text-center">
-        {(pokemon.height / 10).toFixed(1)}m • {(pokemon.weight / 10).toFixed(1)}kg
       </div>
     </div>
   );
