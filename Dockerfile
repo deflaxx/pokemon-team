@@ -1,5 +1,3 @@
-
-################ Build stage ################
 FROM node:20-alpine AS build
 
 WORKDIR /app
@@ -12,7 +10,6 @@ COPY . .
 
 RUN npm run build
 
-############## Production stage ##############
 FROM nginx:1.26-alpine
 
 WORKDIR /usr/share/nginx/html
